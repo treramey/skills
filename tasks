@@ -1,0 +1,71 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+REPO_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
+usage() {
+    cat <<'EOF'
+Usage: ./tasks <command>
+
+Commands:
+  install-deps          Install dependencies (uv)
+  install-uv            Install uv
+  sync, s               Commit here, install skills in ~/.agents, commit there
+  mdformat-check, mc    Check Markdown formatting
+  mdformat-write, mw    Format Markdown in place
+  help                  Show this help
+EOF
+}
+
+install_uv() {
+    curl -LsSf https://astral.sh/uv/install.sh | sh
+}
+
+install_deps() {
+    install_uv
+}
+
+mdformat_check() {
+    uvx --with mdformat-gfm --with mdformat-frontmatter mdformat --check .
+}
+
+mdformat_write() {
+    uvx --with mdformat-gfm --with mdformat-frontmatter mdformat .
+}
+
+sync() {
+    # Commit in this skills repo
+    ccc
+
+    cd ~/.agents
+    echo "Changed directory to ~/.agents"
+
+    ccc
+
+    # Install skills (defaults to the treramey/skills repo)
+    ./minions install
+
+    ccc
+}
+
+main() {
+    cd "$REPO_DIR"
+    local cmd="${1:-help}"
+    [[ $# -gt 0 ]] && shift
+
+    case "$cmd" in
+        install-deps)            install_deps "$@" ;;
+        install-uv)              install_uv "$@" ;;
+        sync | s)                sync "$@" ;;
+        mdformat-check | mc)     mdformat_check "$@" ;;
+        mdformat-write | mw)     mdformat_write "$@" ;;
+        help | -h | --help)      usage ;;
+        *)
+            echo "Unknown command: $cmd" >&2
+            usage >&2
+            exit 1
+            ;;
+    esac
+}
+
+main "$@"
