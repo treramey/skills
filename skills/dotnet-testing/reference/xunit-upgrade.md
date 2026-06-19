@@ -4,13 +4,13 @@ xUnit 3 is a re-packaged, re-namespaced release that targets the Microsoft Testi
 
 ## Package replacements
 
-| v2 package | v3 package | Notes |
-|---|---|---|
-| `xunit` | `xunit.v3` | Main meta-package |
-| `xunit.assert` | `xunit.v3.assert` | Assertion library |
-| `xunit.core` | `xunit.v3.core` | Core types |
-| `xunit.abstractions` | — | Removed; types moved into `Xunit` namespace |
-| `xunit.runner.visualstudio` | `xunit.runner.visualstudio` (3.x) | Same package id, bump to 3.x |
+| v2 package                  | v3 package                        | Notes                                       |
+| --------------------------- | --------------------------------- | ------------------------------------------- |
+| `xunit`                     | `xunit.v3`                        | Main meta-package                           |
+| `xunit.assert`              | `xunit.v3.assert`                 | Assertion library                           |
+| `xunit.core`                | `xunit.v3.core`                   | Core types                                  |
+| `xunit.abstractions`        | —                                 | Removed; types moved into `Xunit` namespace |
+| `xunit.runner.visualstudio` | `xunit.runner.visualstudio` (3.x) | Same package id, bump to 3.x                |
 
 Use `xunit.v3`, **not** `xunit`. The old `xunit` package id continues to publish v2 releases and will not resolve to v3.
 

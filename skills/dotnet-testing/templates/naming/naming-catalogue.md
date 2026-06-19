@@ -2,7 +2,7 @@
 
 A reference catalogue of three-part test names organised by category. Use these as templates when a fresh test needs a name. All examples use `Method_Scenario_ExpectedBehavior` form.
 
----
+______________________________________________________________________
 
 ## 1. Arithmetic
 
@@ -23,7 +23,7 @@ Multiply_WhenGiven3And4_ShouldReturn12
 Multiply_WhenGivenVariousInputs_ShouldReturnCorrectResult
 ```
 
----
+______________________________________________________________________
 
 ## 2. Validation
 
@@ -56,7 +56,7 @@ IsValidPassword_WhenMissingUppercase_ShouldReturnFalse
 IsValidPassword_WhenMissingDigit_ShouldReturnFalse
 ```
 
----
+______________________________________________________________________
 
 ## 3. Business logic
 
@@ -92,7 +92,7 @@ CalculateWithTax_WhenGivenValidCombinations_ShouldReturnExpected
 CalculateWithTax_WhenPriceIsZero_ShouldHandleGracefully
 ```
 
----
+______________________________________________________________________
 
 ## 4. State changes
 
@@ -115,7 +115,7 @@ Reset_WhenCalledFromAnyValue_ShouldReturnToZero
 SetValue_WhenGivenArbitraryValue_ShouldStoreThatValue
 ```
 
----
+______________________________________________________________________
 
 ## 5. Collection operations
 
@@ -138,7 +138,7 @@ Count_WhenCollectionIsEmpty_ShouldReturn0
 Count_WhenCollectionHas3Items_ShouldReturn3
 ```
 
----
+______________________________________________________________________
 
 ## 6. Async operations
 
@@ -157,7 +157,7 @@ DeleteAsync_WhenIdExists_ShouldRemoveEntity
 DeleteAsync_WhenIdDoesNotExist_ShouldReturnFalse
 ```
 
----
+______________________________________________________________________
 
 ## 7. Exception-test naming
 
@@ -181,7 +181,7 @@ Method_WhenBusinessRuleViolated_ShouldThrowBusinessRuleException
 Method_WhenInputIsInvalid_ShouldThrowExceptionWithExpectedMessage
 ```
 
----
+______________________________________________________________________
 
 ## 8. `[Theory]` naming
 
@@ -199,7 +199,7 @@ Method_WhenGivenVariousAValues_ShouldReturnCorrespondingBValues
 GetDomain_WhenGivenValidEmails_ShouldReturnCorrespondingDomain
 ```
 
----
+______________________________________________________________________
 
 ## Templates — copy and replace `{ }`
 

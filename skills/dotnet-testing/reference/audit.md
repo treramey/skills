@@ -40,7 +40,7 @@ grep -rEn 'Skip\s*=\s*"[^"]*"' --include='*.cs' tests/ src/
 
 Report: number of test projects, total tests, skipped count, list of skip strings that **do not** contain a ticket pattern (`LAAIR-\d+`, `SVAPI-\d+`).
 
-**Score 0–4**: 0 = no tests; 1 = sparse (<1 test per production class on average); 2 = some coverage, large gaps; 3 = mostly mirrored, a few classes uncovered; 4 = every production class has a `*Tests` peer.
+**Score 0–4**: 0 = no tests; 1 = sparse (\<1 test per production class on average); 2 = some coverage, large gaps; 3 = mostly mirrored, a few classes uncovered; 4 = every production class has a `*Tests` peer.
 
 ### 2. Coverage
 
@@ -54,7 +54,7 @@ find ./.audit-coverage -name coverage.cobertura.xml
 
 For each `coverage.cobertura.xml`, read `line-rate` and `branch-rate` from the root element. Report headline per project and overall (weighted by line count).
 
-**Score 0–4**: 0 = no coverage data produced; 1 = <40% line-rate; 2 = 40–60%; 3 = 60–80%; 4 = >80% with branch-rate within 10 points of line-rate.
+**Score 0–4**: 0 = no coverage data produced; 1 = \<40% line-rate; 2 = 40–60%; 3 = 60–80%; 4 = >80% with branch-rate within 10 points of line-rate.
 
 #### Headline contamination check
 
@@ -143,7 +143,7 @@ grep -rEnh '\[Trait\("Category"\s*,\s*"Integration"\)\]|: IClassFixture<WebAppli
 
 Report ratio of integration vs unit. The audit notes the number; whether the ratio is *appropriate* is a `critique` question.
 
-**Score 0–4**: 0 = >50% integration; 1 = 30–50%; 2 = 15–30%; 3 = 5–15%; 4 = <5% (healthy pyramid). Score 0 also if there are *zero* integration tests in a project that needs them — but that judgment belongs in `critique`.
+**Score 0–4**: 0 = >50% integration; 1 = 30–50%; 2 = 15–30%; 3 = 5–15%; 4 = \<5% (healthy pyramid). Score 0 also if there are *zero* integration tests in a project that needs them — but that judgment belongs in `critique`.
 
 ### 6. Infrastructure
 

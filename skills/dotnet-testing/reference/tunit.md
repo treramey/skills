@@ -17,11 +17,11 @@ Do **not** migrate an existing xUnit suite to TUnit without a written reason. Th
 
 ### Reported performance (upstream)
 
-| Scenario | xUnit | TUnit (source-gen) | TUnit (AOT) |
-|---|---|---|---|
-| Simple tests | ~1400 ms | ~1000 ms | ~60 ms |
-| Async tests | ~1400 ms | ~930 ms | ~26 ms |
-| Parallel suite | ~1425 ms | ~999 ms | ~54 ms |
+| Scenario       | xUnit    | TUnit (source-gen) | TUnit (AOT) |
+| -------------- | -------- | ------------------ | ----------- |
+| Simple tests   | ~1400 ms | ~1000 ms           | ~60 ms      |
+| Async tests    | ~1400 ms | ~930 ms            | ~26 ms      |
+| Parallel suite | ~1425 ms | ~999 ms            | ~54 ms      |
 
 Numbers are illustrative — measure on your own suite before adopting.
 
@@ -104,16 +104,16 @@ Templates: [templates/tunit/advanced-data-sources.cs](../templates/tunit/advance
 
 Three scopes — Test, Class, Assembly — each with `[Before(...)]` and `[After(...)]` attributes:
 
-| Hook | Method shape | Runs |
-|---|---|---|
-| `[Before(Test)]` | instance | before every test |
-| `[After(Test)]` | instance | after every test |
-| `[Before(Class)]` | static | once before the first test in the class |
-| `[After(Class)]` | static | once after the last test in the class |
-| `[Before(Assembly)]` | static | once before any test in the assembly |
-| `[After(Assembly)]` | static | once after every test in the assembly |
-| `[BeforeEvery(Test)]` / `[AfterEvery(Test)]` | static, global | once around every test in the assembly |
-| `IDisposable` / `IAsyncDisposable` | instance | between `[After(Test)]` and `[After(Class)]` |
+| Hook                                         | Method shape   | Runs                                         |
+| -------------------------------------------- | -------------- | -------------------------------------------- |
+| `[Before(Test)]`                             | instance       | before every test                            |
+| `[After(Test)]`                              | instance       | after every test                             |
+| `[Before(Class)]`                            | static         | once before the first test in the class      |
+| `[After(Class)]`                             | static         | once after the last test in the class        |
+| `[Before(Assembly)]`                         | static         | once before any test in the assembly         |
+| `[After(Assembly)]`                          | static         | once after every test in the assembly        |
+| `[BeforeEvery(Test)]` / `[AfterEvery(Test)]` | static, global | once around every test in the assembly       |
+| `IDisposable` / `IAsyncDisposable`           | instance       | between `[After(Test)]` and `[After(Class)]` |
 
 Execution order for a typical class: `Before(Class)` → constructor → `Before(Test)` → test → `After(Test)` → `Dispose` → `After(Class)`.
 
@@ -237,23 +237,23 @@ For containers under TUnit, `[Before(Assembly)]` / `[After(Assembly)]` is the id
 
 When there is a written reason to migrate:
 
-| xUnit | TUnit |
-|---|---|
-| `[Fact]` | `[Test]` |
-| `[Theory]` + `[InlineData(...)]` | `[Test]` + `[Arguments(...)]` |
-| `[MemberData(nameof(Data))]` | `[MethodDataSource(nameof(Data))]` |
-| Constructor setup | `[Before(Test)]` (or keep constructor) |
-| `IDisposable.Dispose` | `[After(Test)]` (or keep `Dispose`) |
-| `IClassFixture<T>` | `[Before(Class)]` + static state, or `ClassDataSource<T>` for injection |
-| `ICollectionFixture<T>` | `[Before(Assembly)]` + static state |
-| `Assert.Equal(expected, actual)` | `await Assert.That(actual).IsEqualTo(expected)` |
-| `Assert.True(value)` | `await Assert.That(value).IsTrue()` |
-| `Assert.Null(value)` | `await Assert.That(value).IsNull()` |
-| `Assert.Throws<T>(() => f())` | `await Assert.That(() => f()).Throws<T>()` |
-| `[Trait("Category", "Unit")]` | `[Property("Category", "Unit")]` |
-| Skip via `[Fact(Skip = "...")]` | `[Skip("...")]` |
-| Async signature `async Task` | unchanged — required |
-| `dotnet test` | `dotnet run` |
+| xUnit                            | TUnit                                                                   |
+| -------------------------------- | ----------------------------------------------------------------------- |
+| `[Fact]`                         | `[Test]`                                                                |
+| `[Theory]` + `[InlineData(...)]` | `[Test]` + `[Arguments(...)]`                                           |
+| `[MemberData(nameof(Data))]`     | `[MethodDataSource(nameof(Data))]`                                      |
+| Constructor setup                | `[Before(Test)]` (or keep constructor)                                  |
+| `IDisposable.Dispose`            | `[After(Test)]` (or keep `Dispose`)                                     |
+| `IClassFixture<T>`               | `[Before(Class)]` + static state, or `ClassDataSource<T>` for injection |
+| `ICollectionFixture<T>`          | `[Before(Assembly)]` + static state                                     |
+| `Assert.Equal(expected, actual)` | `await Assert.That(actual).IsEqualTo(expected)`                         |
+| `Assert.True(value)`             | `await Assert.That(value).IsTrue()`                                     |
+| `Assert.Null(value)`             | `await Assert.That(value).IsNull()`                                     |
+| `Assert.Throws<T>(() => f())`    | `await Assert.That(() => f()).Throws<T>()`                              |
+| `[Trait("Category", "Unit")]`    | `[Property("Category", "Unit")]`                                        |
+| Skip via `[Fact(Skip = "...")]`  | `[Skip("...")]`                                                         |
+| Async signature `async Task`     | unchanged — required                                                    |
+| `dotnet test`                    | `dotnet run`                                                            |
 
 Mechanical changes that almost always need to happen during migration:
 

@@ -1,15 +1,15 @@
 ---
-argument-hint: '[--all] [--deep] [--push] [--close <issue_numbers>]'
+argument-hint: '[TICKET-123] [--all] [--deep] [--push] [--close <issue_numbers>]'
 disable-model-invocation: false
 effort: medium
 name: commit
 user-invocable: true
-description: 'This skill should be used when the user asks to commit changes, craft a commit message, or run a commit workflow. Creates atomic git commits with conventional-commit formatting and optional deep analysis or push. Flags: --all, --deep, --close, --push.'
+description: 'This skill should be used when the user asks to commit changes, craft a commit message, or run a commit workflow. Creates atomic git commits formatted as `TICKET-123: message` (ticket derived from the branch name), with optional deep analysis or push. Flags: --all, --deep, --close, --push.'
 ---
 
 # Git Commit
 
-Create atomic commits by staging the right files, analyzing the staged diff, composing a conventional commit message, and optionally pushing.
+Create atomic commits by staging the right files, analyzing the staged diff, composing a `TICKET-123: message` subject, and optionally pushing. Branches are named after the Jira ticket being worked on, so the ticket key is read from the current branch.
 
 ## Workflow
 
@@ -34,12 +34,12 @@ Arguments: `$ARGUMENTS`
 
 - Flags:
   - `--all` commit all changes
-  - `--deep` deep analysis, breaking changes, concise body
+  - `--deep` deep semantic analysis, concise WHY-focused body
   - `--push` push after commit
   - `--close <issue_numbers>` append `Closes #N` trailers for listed issues (comma/space-separated)
 - Value arguments:
-  - Type keyword (any conventional type) overrides inferred type
-  - Quoted text overrides inferred description
+  - Ticket key matching `[A-Z][A-Z0-9]+-[0-9]+` (e.g. `PROJ-123`) overrides the branch-derived ticket
+  - Quoted text overrides the inferred description
 
 ### 3) Stage + read diff
 
@@ -61,34 +61,19 @@ Arguments: `$ARGUMENTS`
 
 Read the staged diff and produce the commit message in a single pass.
 
-**Type inference** — determine from behavior:
+**Ticket key** — resolve in order, first match wins:
 
-| Behavior                                           | Type          |
-| -------------------------------------------------- | ------------- |
-| New functionality                                  | `feat`        |
-| Bug fix / error handling                           | `fix`         |
-| Code reorganization, no behavior change            | `refactor`    |
-| Documentation                                      | `docs`        |
-| Tests                                              | `test`        |
-| Build system (webpack, vite, esbuild)              | `build`       |
-| CI/CD pipelines                                    | `ci`          |
-| Dependencies                                       | `chore(deps)` |
-| Formatting / whitespace only                       | `style`       |
-| Performance                                        | `perf`        |
-| Reverting previous commit                          | `revert`      |
-| AI config (CLAUDE.md, .claude/, .gemini/, .codex/) | `ai`          |
-| Other maintenance                                  | `chore`       |
+1. Ticket argument (`[A-Z][A-Z0-9]+-[0-9]+`, e.g. `PROJ-123`) if provided.
+2. First `[A-Z][A-Z0-9]+-[0-9]+` match in the current branch name.
 
-Explicit type keyword in arguments takes precedence over inference.
+If neither yields a ticket, stop and ask for one — never guess or commit without it.
 
-**Scope** — infer only when path makes it obvious (lowercase).
-
-**Unrelated hunks** — ignore pre-existing changes when determining type/scope/description. If unrelated changes are in the same file as session changes, they are included in the commit scope but should not influence the message.
+**Unrelated hunks** — ignore pre-existing changes when determining the description. If unrelated changes share a file with session changes, they are included in the commit but must not influence the message.
 
 **Message format:**
 
-- Subject line (\<= 50 chars): `type(scope): description` or `type: description`
-- Imperative mood ("add" not "added"), lowercase, no period
+- Subject: `TICKET-123: description` (keep the whole line \<= 72 chars)
+- Description in imperative mood ("add" not "added"), no trailing period
 - Describe what the change does, not which files changed
 - Body: hyphenated lines for distinct changes; skip for trivial changes
 
@@ -96,10 +81,8 @@ Explicit type keyword in arguments takes precedence over inference.
 
 **If `--deep`:**
 
-- Deep semantic analysis; detect breaking changes
-- Infer scope from code structure even when path isn't clear
-- Body: 2-3 hyphenated lines max, focus on WHY
-- Breaking change: `BREAKING CHANGE:` + one-line migration note
+- Deep semantic analysis of the diff
+- Body: 2-3 hyphenated lines max, focused on WHY
 
 **If `--close`:**
 

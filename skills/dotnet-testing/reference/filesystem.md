@@ -8,20 +8,20 @@ FIRST applies — see SKILL.md. For interaction-level mocking and `IFileSystem` 
 
 ## Why static `System.IO` is hard to test
 
-| Problem | Symptom |
-|---|---|
-| Speed | Disk I/O is 10-100x slower than in-memory operations. Slow tests = the suite stops being run. |
-| Environment coupling | Tests pass on your laptop, fail in CI because of path / permission differences. |
-| Side effects | A test leaves a file behind; the next test sees it; tests stop being *Independent*. |
-| Concurrency | Parallel tests writing to the same path race each other. |
-| Failure simulation | Hard to provoke `UnauthorizedAccessException`, `IOException`, disk-full conditions in real life. |
+| Problem              | Symptom                                                                                          |
+| -------------------- | ------------------------------------------------------------------------------------------------ |
+| Speed                | Disk I/O is 10-100x slower than in-memory operations. Slow tests = the suite stops being run.    |
+| Environment coupling | Tests pass on your laptop, fail in CI because of path / permission differences.                  |
+| Side effects         | A test leaves a file behind; the next test sees it; tests stop being *Independent*.              |
+| Concurrency          | Parallel tests writing to the same path race each other.                                         |
+| Failure simulation   | Hard to provoke `UnauthorizedAccessException`, `IOException`, disk-full conditions in real life. |
 
 ## Packages
 
-| Project | Package |
-|---|---|
-| Production | `System.IO.Abstractions` |
-| Tests | `System.IO.Abstractions.TestingHelpers` |
+| Project    | Package                                 |
+| ---------- | --------------------------------------- |
+| Production | `System.IO.Abstractions`                |
+| Tests      | `System.IO.Abstractions.TestingHelpers` |
 
 Versions are pinned in `Directory.Packages.props`.
 

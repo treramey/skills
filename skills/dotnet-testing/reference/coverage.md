@@ -12,13 +12,13 @@ The repo standard is `coverlet.collector` for collection, Cobertura for reportin
 
 ## Tool landscape
 
-| Tool | Notes | Best for |
-|---|---|---|
-| Visual Studio Enterprise | Built-in coverage UI | Devs on Enterprise |
-| Fine Code Coverage (FCC) | Free VS extension, editor highlights | VS Community / Professional |
-| `dotnet test` + `coverlet.collector` | Cross-platform CLI | CI/CD, scripted runs |
-| VS Code C# Dev Kit | Built-in "Run Tests with Coverage" | VS Code workflow |
-| ReportGenerator | Merges Cobertura, produces HTML | CI reports & local exploration |
+| Tool                                 | Notes                                | Best for                       |
+| ------------------------------------ | ------------------------------------ | ------------------------------ |
+| Visual Studio Enterprise             | Built-in coverage UI                 | Devs on Enterprise             |
+| Fine Code Coverage (FCC)             | Free VS extension, editor highlights | VS Community / Professional    |
+| `dotnet test` + `coverlet.collector` | Cross-platform CLI                   | CI/CD, scripted runs           |
+| VS Code C# Dev Kit                   | Built-in "Run Tests with Coverage"   | VS Code workflow               |
+| ReportGenerator                      | Merges Cobertura, produces HTML      | CI reports & local exploration |
 
 ## Running coverage locally
 
@@ -123,12 +123,12 @@ Worth excluding: EF Core migrations, `Program.cs`/`Startup.cs`, generated gRPC/O
 
 ## Reading the report
 
-| Color | Meaning |
-|---|---|
-| Green | Line executed |
+| Color  | Meaning                                          |
+| ------ | ------------------------------------------------ |
+| Green  | Line executed                                    |
 | Yellow | Partially covered (one branch taken, others not) |
-| Red | Never executed |
-| Grey | Excluded — verify the exclusion is intentional |
+| Red    | Never executed                                   |
+| Grey   | Excluded — verify the exclusion is intentional   |
 
 Three metrics matter:
 
@@ -289,12 +289,12 @@ The `coverage-analysis` skill has the full Azure DevOps pattern (and the thresho
 
 When you need to lift a number, work in stages instead of carpet-bombing the codebase with tests.
 
-| Stage | Target | What to do |
-|---|---|---|
-| Baseline | 60-70% | Cover core business logic, primary flow, basic boundaries |
-| Critical gaps | 70-80% | Cover red regions: boundaries, exception paths, missing branches |
-| Polish | 80-85% | Cover yellow regions, tighten assertions, exclude generated code |
-| Maintain | hold | CI gate; new code must come with tests; review coverage diff on PR |
+| Stage         | Target | What to do                                                         |
+| ------------- | ------ | ------------------------------------------------------------------ |
+| Baseline      | 60-70% | Cover core business logic, primary flow, basic boundaries          |
+| Critical gaps | 70-80% | Cover red regions: boundaries, exception paths, missing branches   |
+| Polish        | 80-85% | Cover yellow regions, tighten assertions, exclude generated code   |
+| Maintain      | hold   | CI gate; new code must come with tests; review coverage diff on PR |
 
 Within each stage, prioritise by risk:
 

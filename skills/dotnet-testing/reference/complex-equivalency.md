@@ -4,19 +4,19 @@
 
 ## Options cheat sheet
 
-| Option | Purpose | When to use |
-|---|---|---|
-| `Excluding(x => x.Property)` | Exclude a property | Skip timestamps, auto-generated ids |
-| `Excluding(ctx => ctx.Path.EndsWith("At"))` | Path-pattern exclusion | Bulk-skip `CreatedAt`/`UpdatedAt`/`ModifiedAt` |
-| `Excluding(ctx => ctx.Name == "X")` | Name-predicate exclusion (9.3+) | Skip by member name |
-| `Including(x => x.Property)` | Whitelist | Validate only the few properties that matter |
-| `ExcludingMissingMembers()` | Ignore members not on the expected side | Compare against an anonymous object / DTO with fewer fields |
-| `IgnoringCyclicReferences()` | Tolerate cycles | Trees, bidirectional graphs, EF navigation |
-| `WithMaxRecursionDepth(n)` | Bound recursion | Deeply nested structures |
-| `WithStrictOrdering()` | Order matters | Sequences where position is the contract |
-| `WithoutStrictOrdering()` | Order does not matter | Default; restate when scoping options |
-| `RespectingRuntimeTypes()` | Compare by runtime type | Polymorphic graphs |
-| `WithTracing()` | Detailed comparison trace | Debugging a stubborn mismatch |
+| Option                                      | Purpose                                 | When to use                                                 |
+| ------------------------------------------- | --------------------------------------- | ----------------------------------------------------------- |
+| `Excluding(x => x.Property)`                | Exclude a property                      | Skip timestamps, auto-generated ids                         |
+| `Excluding(ctx => ctx.Path.EndsWith("At"))` | Path-pattern exclusion                  | Bulk-skip `CreatedAt`/`UpdatedAt`/`ModifiedAt`              |
+| `Excluding(ctx => ctx.Name == "X")`         | Name-predicate exclusion (9.3+)         | Skip by member name                                         |
+| `Including(x => x.Property)`                | Whitelist                               | Validate only the few properties that matter                |
+| `ExcludingMissingMembers()`                 | Ignore members not on the expected side | Compare against an anonymous object / DTO with fewer fields |
+| `IgnoringCyclicReferences()`                | Tolerate cycles                         | Trees, bidirectional graphs, EF navigation                  |
+| `WithMaxRecursionDepth(n)`                  | Bound recursion                         | Deeply nested structures                                    |
+| `WithStrictOrdering()`                      | Order matters                           | Sequences where position is the contract                    |
+| `WithoutStrictOrdering()`                   | Order does not matter                   | Default; restate when scoping options                       |
+| `RespectingRuntimeTypes()`                  | Compare by runtime type                 | Polymorphic graphs                                          |
+| `WithTracing()`                             | Detailed comparison trace               | Debugging a stubborn mismatch                               |
 
 ## Pattern 1 — Deep object graph
 

@@ -50,11 +50,11 @@ Tests written weeks after the code tend to canonize whatever the code happens to
 
 Every test method follows Arrange-Act-Assert. The structure makes intent obvious at a glance and makes it impossible to "hide" multiple behaviours inside one test.
 
-| Block | Responsibility | Notes |
-|---|---|---|
-| **Arrange** | Build the SUT and the inputs; configure test doubles. | Use `const` for primitive expected/inputs to make them readable. |
-| **Act** | Invoke the method under test. | Usually a single line — calling the SUT method once. |
-| **Assert** | Verify the outcome. | One behaviour per test. Multiple `.Should()` calls on related facets of one outcome are fine; verifying two independent behaviours is two tests. |
+| Block       | Responsibility                                        | Notes                                                                                                                                            |
+| ----------- | ----------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Arrange** | Build the SUT and the inputs; configure test doubles. | Use `const` for primitive expected/inputs to make them readable.                                                                                 |
+| **Act**     | Invoke the method under test.                         | Usually a single line — calling the SUT method once.                                                                                             |
+| **Assert**  | Verify the outcome.                                   | One behaviour per test. Multiple `.Should()` calls on related facets of one outcome are fine; verifying two independent behaviours is two tests. |
 
 ```csharp
 [Fact]
@@ -93,11 +93,11 @@ A common mistake is the *ice cream cone* — heavy at the top, light at the bott
 
 ## `[Fact]` vs `[Theory]` — when to pick which
 
-| Choose `[Fact]` when… | Choose `[Theory]` when… |
-|---|---|
-| Exactly one scenario | Multiple input combinations exercise the same logic |
-| The arrangement varies meaningfully between scenarios | Inputs differ but the assertion shape is the same |
-| Cause and effect are tied to one specific value | Boundaries, equivalence classes, invalid input families |
+| Choose `[Fact]` when…                                 | Choose `[Theory]` when…                                 |
+| ----------------------------------------------------- | ------------------------------------------------------- |
+| Exactly one scenario                                  | Multiple input combinations exercise the same logic     |
+| The arrangement varies meaningfully between scenarios | Inputs differ but the assertion shape is the same       |
+| Cause and effect are tied to one specific value       | Boundaries, equivalence classes, invalid input families |
 
 ```csharp
 [Theory]

@@ -161,22 +161,22 @@ public sealed class CalculatorTests : IDisposable
 
 ### Test project names
 
-| Production project | Test project | Notes |
-|---|---|---|
-| `MyProject.Core` | `MyProject.Core.Tests` | Unit tests |
-| `MyProject.Web` | `MyProject.Web.Tests` | Web layer unit tests |
-| `MyProject.Web` | `MyProject.Web.Integration.Tests` | Web layer integration tests |
-| `MyProject` | `MyProject.Acceptance.Tests` | Acceptance tests |
-| `MyProject` | `MyProject.Performance.Tests` | Performance/benchmark tests |
+| Production project | Test project                      | Notes                       |
+| ------------------ | --------------------------------- | --------------------------- |
+| `MyProject.Core`   | `MyProject.Core.Tests`            | Unit tests                  |
+| `MyProject.Web`    | `MyProject.Web.Tests`             | Web layer unit tests        |
+| `MyProject.Web`    | `MyProject.Web.Integration.Tests` | Web layer integration tests |
+| `MyProject`        | `MyProject.Acceptance.Tests`      | Acceptance tests            |
+| `MyProject`        | `MyProject.Performance.Tests`     | Performance/benchmark tests |
 
 ### Test class names
 
-| Production class | Test class | File |
-|---|---|---|
-| `Calculator` | `CalculatorTests` | `CalculatorTests.cs` |
-| `OrderService` | `OrderServiceTests` | `OrderServiceTests.cs` |
+| Production class | Test class            | File                     |
+| ---------------- | --------------------- | ------------------------ |
+| `Calculator`     | `CalculatorTests`     | `CalculatorTests.cs`     |
+| `OrderService`   | `OrderServiceTests`   | `OrderServiceTests.cs`   |
 | `UserRepository` | `UserRepositoryTests` | `UserRepositoryTests.cs` |
-| `StringHelper` | `StringHelperTests` | `StringHelperTests.cs` |
+| `StringHelper`   | `StringHelperTests`   | `StringHelperTests.cs`   |
 
 ## Directory mirroring rule
 

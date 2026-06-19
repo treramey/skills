@@ -8,11 +8,11 @@ Output path: `docs/testing-plans/<YYYY-MM-DD>-<slug>.md`. `<slug>` is the domina
 
 `to-plan` accepts any of three input combinations. The plan's *shape* changes with the input — don't try to force every plan into the same template fields.
 
-| Input | Plan shape | Typical slices |
-|---|---|---|
-| **Audit only** | Measurement-driven. Goals are numeric: raise %, kill N violations, cap M slow tests. The work breakdown is dominated by net-new test writing and tool config changes. | "Write `*Tests.cs` for `<class>`" (one per uncovered class or namespace group); "Add `coverlet.runsettings` first-party filter"; "Replace `Thread.Sleep` in `<file>:<line>`"; "Move slow test to `IntegrationTests` project". |
-| **Critique only** | Architecture-driven. Goals are structural: extract a seam, split a project, kill a shared base class. The work breakdown is dominated by production-code refactors that *enable* tests, paired with the test changes that prove them. | "Extract `IClock` and inject everywhere"; "Split `OrderService` into `Calculator` + `Orchestrator` so business rules can be unit-tested without WAF"; "Move `OrderTestBase` into per-test inlines". |
-| **Both** | Synthesis. Use when audit and critique both surfaced material findings and the plan needs to cover both axes (e.g., coverage gap *and* a structural barrier preventing the gap from closing). | Order slices so architectural enablers come first, then the measurement-driven tests they unblock. |
+| Input             | Plan shape                                                                                                                                                                                                                            | Typical slices                                                                                                                                                                                                                |
+| ----------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Audit only**    | Measurement-driven. Goals are numeric: raise %, kill N violations, cap M slow tests. The work breakdown is dominated by net-new test writing and tool config changes.                                                                 | "Write `*Tests.cs` for `<class>`" (one per uncovered class or namespace group); "Add `coverlet.runsettings` first-party filter"; "Replace `Thread.Sleep` in `<file>:<line>`"; "Move slow test to `IntegrationTests` project". |
+| **Critique only** | Architecture-driven. Goals are structural: extract a seam, split a project, kill a shared base class. The work breakdown is dominated by production-code refactors that *enable* tests, paired with the test changes that prove them. | "Extract `IClock` and inject everywhere"; "Split `OrderService` into `Calculator` + `Orchestrator` so business rules can be unit-tested without WAF"; "Move `OrderTestBase` into per-test inlines".                           |
+| **Both**          | Synthesis. Use when audit and critique both surfaced material findings and the plan needs to cover both axes (e.g., coverage gap *and* a structural barrier preventing the gap from closing).                                         | Order slices so architectural enablers come first, then the measurement-driven tests they unblock.                                                                                                                            |
 
 If the user has run *neither* audit *nor* critique, do not synthesize — ask which one is appropriate for their question and load the corresponding reference first.
 
@@ -25,6 +25,7 @@ If the user has run *neither* audit *nor* critique, do not synthesize — ask wh
 3. Distill the inputs into the template below. Don't paraphrase findings verbatim; the plan is a synthesis, not a digest. **Do not move audit findings into "Out of scope"** — if audit said Coverage is 1/4, the plan's Target state must include a coverage threshold and the Work Breakdown must contain the test-writing slices to reach it. Punting on measurement findings defeats the purpose of an audit-driven plan.
 
 4. **Quiz the user on the Work Breakdown before writing.** Show the proposed slices as a numbered list — title, scope, blocked-by. Ask:
+
    - Does the granularity feel right?
    - Are the dependencies correct?
    - Should any slices be merged or split?
@@ -37,7 +38,7 @@ If the user has run *neither* audit *nor* critique, do not synthesize — ask wh
 
 # Testing improvement plan — <slug>
 
-> Generated <YYYY-MM-DD>. Source: <audit (<date>) | critique (<date>) | audit (<date>) + critique (<date>)>.
+> Generated <YYYY-MM-DD>. Source: \<audit (<date>) | critique (<date>) | audit (<date>) + critique (<date>)>.
 
 ## Current state
 
@@ -58,12 +59,14 @@ How we get there. Architectural decisions from critique, distilled to one or two
 Vertical slices, ordered by dependency. Each slice cuts end-to-end (production change + test change + verification). Each slice is independently demoable.
 
 1. **<title>**
+
    - Scope: <one-line scope>
    - Acceptance: <gate>
-   - Blocked by: <slice number, or None>
+   - Blocked by: \<slice number, or None>
    - Type: AFK (default) or HITL
 
 2. **<title>**
+
    - …
 
 Prefer many thin slices over few thick ones.

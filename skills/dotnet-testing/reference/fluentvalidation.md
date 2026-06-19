@@ -36,16 +36,16 @@ Official upgrade guide: <https://docs.fluentvalidation.net/en/latest/upgrading-t
 
 ## Core API
 
-| Method | Purpose |
-|---|---|
-| `TestValidate(model)` | Run sync validation; returns `TestValidationResult<T>` |
-| `TestValidateAsync(model)` | Async variant |
-| `result.ShouldHaveValidationErrorFor(x => x.Property)` | Assert at least one error on the property |
-| `result.ShouldNotHaveValidationErrorFor(x => x.Property)` | Assert no errors on the property |
-| `result.ShouldNotHaveAnyValidationErrors()` | Whole object is valid |
-| `result.ShouldHaveValidationErrors()` | Whole object has at least one error |
-| `.WithErrorMessage("...")` | Chain after `ShouldHaveValidationErrorFor` to assert the message |
-| `.WithErrorCode("...")` | Chain to assert the rule's error code |
+| Method                                                    | Purpose                                                          |
+| --------------------------------------------------------- | ---------------------------------------------------------------- |
+| `TestValidate(model)`                                     | Run sync validation; returns `TestValidationResult<T>`           |
+| `TestValidateAsync(model)`                                | Async variant                                                    |
+| `result.ShouldHaveValidationErrorFor(x => x.Property)`    | Assert at least one error on the property                        |
+| `result.ShouldNotHaveValidationErrorFor(x => x.Property)` | Assert no errors on the property                                 |
+| `result.ShouldNotHaveAnyValidationErrors()`               | Whole object is valid                                            |
+| `result.ShouldHaveValidationErrors()`                     | Whole object has at least one error                              |
+| `.WithErrorMessage("...")`                                | Chain after `ShouldHaveValidationErrorFor` to assert the message |
+| `.WithErrorCode("...")`                                   | Chain to assert the rule's error code                            |
 
 ## Pattern 1 — Basic field validation
 

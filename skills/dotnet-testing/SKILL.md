@@ -73,16 +73,16 @@ See [reference/naming.md](reference/naming.md) for the full rule set.
 
 xUnit-based. No other framework unless the user is migrating *to* xUnit (see [reference/xunit-upgrade.md](reference/xunit-upgrade.md)) or evaluating TUnit (see [reference/tunit.md](reference/tunit.md)).
 
-| Concern | Package | Reference |
-|---|---|---|
-| Runner | `xunit` + `xunit.runner.visualstudio` + `Microsoft.NET.Test.Sdk` | [reference/xunit-setup.md](reference/xunit-setup.md) |
-| Assertions | `AwesomeAssertions` | [reference/awesome-assertions.md](reference/awesome-assertions.md), [reference/complex-equivalency.md](reference/complex-equivalency.md) |
-| Test doubles | `NSubstitute` | [reference/nsubstitute.md](reference/nsubstitute.md) |
-| Test data | `AutoFixture` (+ `AutoFixture.AutoNSubstitute`, `AutoFixture.Xunit2`) | [reference/autofixture.md](reference/autofixture.md) |
-| Fake data | `Bogus` | [reference/bogus.md](reference/bogus.md) |
-| Validator tests | `FluentValidation.TestHelper` | [reference/fluentvalidation.md](reference/fluentvalidation.md) |
-| Coverage | `coverlet.collector` | [reference/coverage.md](reference/coverage.md) |
-| Integration | `Microsoft.AspNetCore.Mvc.Testing`, `Testcontainers.*`, `Aspire.Hosting.Testing` | [reference/aspnet-integration.md](reference/aspnet-integration.md), [reference/testcontainers.md](reference/testcontainers.md), [reference/aspire.md](reference/aspire.md) |
+| Concern         | Package                                                                          | Reference                                                                                                                                                                  |
+| --------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Runner          | `xunit` + `xunit.runner.visualstudio` + `Microsoft.NET.Test.Sdk`                 | [reference/xunit-setup.md](reference/xunit-setup.md)                                                                                                                       |
+| Assertions      | `AwesomeAssertions`                                                              | [reference/awesome-assertions.md](reference/awesome-assertions.md), [reference/complex-equivalency.md](reference/complex-equivalency.md)                                   |
+| Test doubles    | `NSubstitute`                                                                    | [reference/nsubstitute.md](reference/nsubstitute.md)                                                                                                                       |
+| Test data       | `AutoFixture` (+ `AutoFixture.AutoNSubstitute`, `AutoFixture.Xunit2`)            | [reference/autofixture.md](reference/autofixture.md)                                                                                                                       |
+| Fake data       | `Bogus`                                                                          | [reference/bogus.md](reference/bogus.md)                                                                                                                                   |
+| Validator tests | `FluentValidation.TestHelper`                                                    | [reference/fluentvalidation.md](reference/fluentvalidation.md)                                                                                                             |
+| Coverage        | `coverlet.collector`                                                             | [reference/coverage.md](reference/coverage.md)                                                                                                                             |
+| Integration     | `Microsoft.AspNetCore.Mvc.Testing`, `Testcontainers.*`, `Aspire.Hosting.Testing` | [reference/aspnet-integration.md](reference/aspnet-integration.md), [reference/testcontainers.md](reference/testcontainers.md), [reference/aspire.md](reference/aspire.md) |
 
 **Do not add** `MSTest`, `NUnit`, `FluentAssertions` (the legacy MIT fork), `Moq`, `FakeItEasy`. They are not the standard in this repo's solutions.
 
@@ -121,66 +121,66 @@ critique  → to-plan → to-issues   (architecture-driven: pyramid shape, coupl
 
 `audit` and `critique` do **not** gate each other. Run either alone, or run both and let `to-plan` synthesize. Skip `to-plan` entirely when the work is small enough to fix inline.
 
-| Topic | Reference | Use when |
-|---|---|---|
-| `audit` | [reference/audit.md](reference/audit.md) | Measuring the current state — descriptive, runs commands, scores 5 dimensions (Inventory, Coverage, Health, Compliance, Pyramid), enumerates uncovered classes when Coverage is low. Onboarding, baselining before a refactor, periodic drift check, or when the goal is "raise coverage / kill ban violations / cap slow tests." |
-| `critique` | [reference/critique.md](reference/critique.md) | Prescriptive architectural review — pyramid shape, coupling, structural mirroring, missing categories, cross-cutting smells. Output is a prioritized refactor list. Stands alone; no audit prerequisite. |
-| `to-plan` | [reference/to-plan.md](reference/to-plan.md) | Turn audit findings, critique findings, or both into a single durable plan document (committed markdown). Audit-only input produces a measurement-driven plan (raise %, kill bans); critique-only input produces an architecture-driven plan (split, extract, refactor); both inputs synthesize. Skip when the audit/critique found three small things you can fix inline now. |
-| `to-issues` | [reference/to-issues.md](reference/to-issues.md) | Decompose a `to-plan` document's Work Breakdown into vertical-slice TaskCreate tasks in dependency order, then hand off to the agent for in-conversation implementation. Tasks live in this conversation, not in an external tracker. |
+| Topic       | Reference                                        | Use when                                                                                                                                                                                                                                                                                                                                                                       |
+| ----------- | ------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `audit`     | [reference/audit.md](reference/audit.md)         | Measuring the current state — descriptive, runs commands, scores 5 dimensions (Inventory, Coverage, Health, Compliance, Pyramid), enumerates uncovered classes when Coverage is low. Onboarding, baselining before a refactor, periodic drift check, or when the goal is "raise coverage / kill ban violations / cap slow tests."                                              |
+| `critique`  | [reference/critique.md](reference/critique.md)   | Prescriptive architectural review — pyramid shape, coupling, structural mirroring, missing categories, cross-cutting smells. Output is a prioritized refactor list. Stands alone; no audit prerequisite.                                                                                                                                                                       |
+| `to-plan`   | [reference/to-plan.md](reference/to-plan.md)     | Turn audit findings, critique findings, or both into a single durable plan document (committed markdown). Audit-only input produces a measurement-driven plan (raise %, kill bans); critique-only input produces an architecture-driven plan (split, extract, refactor); both inputs synthesize. Skip when the audit/critique found three small things you can fix inline now. |
+| `to-issues` | [reference/to-issues.md](reference/to-issues.md) | Decompose a `to-plan` document's Work Breakdown into vertical-slice TaskCreate tasks in dependency order, then hand off to the agent for in-conversation implementation. Tasks live in this conversation, not in an external tracker.                                                                                                                                          |
 
 ### Foundations
 
-| Topic | Reference | Use when |
-|---|---|---|
-| `fundamentals` | [reference/fundamentals.md](reference/fundamentals.md) | Learning testing from scratch; deeper FIRST + 3A treatment than the shared section above. |
-| `xunit-setup` | [reference/xunit-setup.md](reference/xunit-setup.md) | Creating a test project, `dotnet new xunit`, csproj layout, `xunit.runner.json`, test-project folder layout. |
-| `naming` | [reference/naming.md](reference/naming.md) | Naming tests, naming classes, naming Theory data, edge cases for the three-part pattern. |
-| `builder-pattern` | [reference/builder-pattern.md](reference/builder-pattern.md) | Test Data Builder pattern, fluent `.With…()` builders, replacing dense Arrange blocks. |
-| `output-logging` | [reference/output-logging.md](reference/output-logging.md) | `ITestOutputHelper`, diagnosing flaky tests with structured test output. |
+| Topic             | Reference                                                    | Use when                                                                                                     |
+| ----------------- | ------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------ |
+| `fundamentals`    | [reference/fundamentals.md](reference/fundamentals.md)       | Learning testing from scratch; deeper FIRST + 3A treatment than the shared section above.                    |
+| `xunit-setup`     | [reference/xunit-setup.md](reference/xunit-setup.md)         | Creating a test project, `dotnet new xunit`, csproj layout, `xunit.runner.json`, test-project folder layout. |
+| `naming`          | [reference/naming.md](reference/naming.md)                   | Naming tests, naming classes, naming Theory data, edge cases for the three-part pattern.                     |
+| `builder-pattern` | [reference/builder-pattern.md](reference/builder-pattern.md) | Test Data Builder pattern, fluent `.With…()` builders, replacing dense Arrange blocks.                       |
+| `output-logging`  | [reference/output-logging.md](reference/output-logging.md)   | `ITestOutputHelper`, diagnosing flaky tests with structured test output.                                     |
 
 ### Test data
 
-| Topic | Reference | Use when |
-|---|---|---|
+| Topic         | Reference                                            | Use when                                                                                                                                                |
+| ------------- | ---------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `autofixture` | [reference/autofixture.md](reference/autofixture.md) | AutoFixture basics, `ISpecimenBuilder` customization, AutoData/Theory, NSubstitute integration, Bogus integration — one document, sections per concern. |
-| `bogus` | [reference/bogus.md](reference/bogus.md) | Realistic fake data via `Faker<T>` (names, addresses, emails, dates). Use standalone or together with AutoFixture. |
+| `bogus`       | [reference/bogus.md](reference/bogus.md)             | Realistic fake data via `Faker<T>` (names, addresses, emails, dates). Use standalone or together with AutoFixture.                                      |
 
 ### Test doubles
 
-| Topic | Reference | Use when |
-|---|---|---|
+| Topic         | Reference                                            | Use when                                                                                                                       |
+| ------------- | ---------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------ |
 | `nsubstitute` | [reference/nsubstitute.md](reference/nsubstitute.md) | Mocks, stubs, spies, fakes. `Substitute.For`, `Returns`, `Received`, `Throws`, `Arg.Any`, `Arg.Is`, `ConfigureAwait` patterns. |
 
 ### Assertions
 
-| Topic | Reference | Use when |
-|---|---|---|
-| `awesome-assertions` | [reference/awesome-assertions.md](reference/awesome-assertions.md) | Fluent `Should()` assertions across primitives, collections, exceptions, async results. |
-| `complex-equivalency` | [reference/complex-equivalency.md](reference/complex-equivalency.md) | `BeEquivalentTo`, deep object/DTO comparison, exclusion rules, custom equivalency steps. |
-| `fluentvalidation` | [reference/fluentvalidation.md](reference/fluentvalidation.md) | Testing `AbstractValidator<T>` rules with `TestValidate` / `ShouldHaveValidationErrorFor`. |
+| Topic                 | Reference                                                            | Use when                                                                                   |
+| --------------------- | -------------------------------------------------------------------- | ------------------------------------------------------------------------------------------ |
+| `awesome-assertions`  | [reference/awesome-assertions.md](reference/awesome-assertions.md)   | Fluent `Should()` assertions across primitives, collections, exceptions, async results.    |
+| `complex-equivalency` | [reference/complex-equivalency.md](reference/complex-equivalency.md) | `BeEquivalentTo`, deep object/DTO comparison, exclusion rules, custom equivalency steps.   |
+| `fluentvalidation`    | [reference/fluentvalidation.md](reference/fluentvalidation.md)       | Testing `AbstractValidator<T>` rules with `TestValidate` / `ShouldHaveValidationErrorFor`. |
 
 ### Special scenarios
 
-| Topic | Reference | Use when |
-|---|---|---|
-| `datetime` | [reference/datetime.md](reference/datetime.md) | Testing time-dependent code. `TimeProvider`, `FakeTimeProvider`, avoiding `DateTime.Now` in production code so it can be substituted. |
-| `filesystem` | [reference/filesystem.md](reference/filesystem.md) | Testing file/directory code via `System.IO.Abstractions` (`IFileSystem`, `MockFileSystem`). |
+| Topic        | Reference                                          | Use when                                                                                                                              |
+| ------------ | -------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------- |
+| `datetime`   | [reference/datetime.md](reference/datetime.md)     | Testing time-dependent code. `TimeProvider`, `FakeTimeProvider`, avoiding `DateTime.Now` in production code so it can be substituted. |
+| `filesystem` | [reference/filesystem.md](reference/filesystem.md) | Testing file/directory code via `System.IO.Abstractions` (`IFileSystem`, `MockFileSystem`).                                           |
 
 ### Coverage
 
-| Topic | Reference | Use when |
-|---|---|---|
+| Topic      | Reference                                      | Use when                                                                                    |
+| ---------- | ---------------------------------------------- | ------------------------------------------------------------------------------------------- |
 | `coverage` | [reference/coverage.md](reference/coverage.md) | Measuring with coverlet, Cobertura output, CI threshold gates, `[ExcludeFromCodeCoverage]`. |
 
 ### Integration
 
-| Topic | Reference | Use when |
-|---|---|---|
+| Topic                | Reference                                                          | Use when                                                                                                                            |
+| -------------------- | ------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------- |
 | `aspnet-integration` | [reference/aspnet-integration.md](reference/aspnet-integration.md) | ASP.NET Core endpoint tests. `WebApplicationFactory`, `TestServer`, full CRUD workflow tests, custom service registration in tests. |
-| `testcontainers` | [reference/testcontainers.md](reference/testcontainers.md) | Containerized SQL Server, Postgres, MySQL, MongoDB, Redis, Elasticsearch tests. Real database behavior under Docker. |
-| `aspire` | [reference/aspire.md](reference/aspire.md) | .NET Aspire `DistributedApplication` testing, microservice and inter-service communication tests. |
-| `tunit` | [reference/tunit.md](reference/tunit.md) | TUnit framework basics, advanced DI and parallel execution, migration from xUnit. |
-| `xunit-upgrade` | [reference/xunit-upgrade.md](reference/xunit-upgrade.md) | Migrating xUnit 2.x → 3.x, framework-version migration patterns. |
+| `testcontainers`     | [reference/testcontainers.md](reference/testcontainers.md)         | Containerized SQL Server, Postgres, MySQL, MongoDB, Redis, Elasticsearch tests. Real database behavior under Docker.                |
+| `aspire`             | [reference/aspire.md](reference/aspire.md)                         | .NET Aspire `DistributedApplication` testing, microservice and inter-service communication tests.                                   |
+| `tunit`              | [reference/tunit.md](reference/tunit.md)                           | TUnit framework basics, advanced DI and parallel execution, migration from xUnit.                                                   |
+| `xunit-upgrade`      | [reference/xunit-upgrade.md](reference/xunit-upgrade.md)           | Migrating xUnit 2.x → 3.x, framework-version migration patterns.                                                                    |
 
 ## Scripts, agents, and templates
 

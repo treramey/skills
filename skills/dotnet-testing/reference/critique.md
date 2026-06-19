@@ -48,6 +48,7 @@ grep -rEn ': IClassFixture<WebApplicationFactory|: IAsyncLifetime|Testcontainers
 ```
 
 Smells:
+
 - **Inverted pyramid**: >30% integration in a domain-heavy codebase. Integration tests stress wiring; if business logic only has integration coverage, the logic isn't well-isolated.
 - **No integration tests** in a project that owns HTTP endpoints, EF queries, or message handlers. Unit tests can't catch wire-up bugs.
 - **All-or-nothing**: 100% unit or 100% integration. Both reads as a smell — either the production code is hostile to isolation, or the team distrusts unit tests.
@@ -72,6 +73,7 @@ grep -rEnh '<ProjectReference Include="[^"]+\.csproj"' --include='*.Tests.csproj
 ```
 
 Smells:
+
 - **Friend-assembly access for routine cases**. `InternalsVisibleTo` for narrow legitimate cases (testing a `record` ctor) is fine; spraying it across the codebase to test "easier" indicates production design is hostile to testability.
 - **Shared mutable test base classes**. A 200-line `TestBase` consumed by 40 test classes couples them all to the same setup. When the setup changes, every test inherits the breakage.
 - **Test project referencing five production projects**. The test sits at the wrong layer — it's testing more than one unit.
@@ -95,6 +97,7 @@ comm -23 \
 ```
 
 Smells:
+
 - **`tests/` not mirroring `src/`** — finding the tests for `Foo` requires guessing the project and folder. Onboarding friction.
 - **Major production class with no `*Tests.cs` peer**. Specifically: types with public methods (excluding records, POCOs, DTOs, generated code) that have no corresponding test class.
 - **`MiscTests.cs` or `BugTests.cs` or `IntegrationTests.cs`** — catch-all test classes that aren't paired to any production class. Tests in those files get added but rarely refactored.
@@ -115,6 +118,7 @@ For each test project, ask:
 - For **dispose / cleanup**, is the contract verified?
 
 Smells:
+
 - **Only happy-path tests**. The test class has `…_WhenInputIsValid_ShouldReturnX` but no `…_WhenInputIsInvalid_ShouldThrowY`.
 - **No cancellation tests** for `CancellationToken`-accepting methods.
 - **No null/empty boundary tests** for collection or string inputs.

@@ -4,35 +4,35 @@ The shared rule (`Method_Scenario_ExpectedBehavior`, PascalCase parts, underscor
 
 ## The three parts in detail
 
-| Part | Job | Examples |
-|---|---|---|
-| **Method under test** | The exact public method being exercised. | `Add`, `ProcessOrder`, `IsValidEmail` |
-| **Scenario / input** | The condition the test exercises — input shape, state, or trigger. | `WhenGiven1And2`, `WhenInputIsNull`, `WhenOrderIsValid` |
-| **Expected behavior** | The observable outcome. Specific, verifiable. | `ShouldReturn3`, `ShouldThrowArgumentNullException`, `ShouldReturnTrue` |
+| Part                  | Job                                                                | Examples                                                                |
+| --------------------- | ------------------------------------------------------------------ | ----------------------------------------------------------------------- |
+| **Method under test** | The exact public method being exercised.                           | `Add`, `ProcessOrder`, `IsValidEmail`                                   |
+| **Scenario / input**  | The condition the test exercises — input shape, state, or trigger. | `WhenGiven1And2`, `WhenInputIsNull`, `WhenOrderIsValid`                 |
+| **Expected behavior** | The observable outcome. Specific, verifiable.                      | `ShouldReturn3`, `ShouldThrowArgumentNullException`, `ShouldReturnTrue` |
 
 ## Scenario phrasing vocabulary
 
 Pick the verb form that matches what the scenario actually *is* — input, event, or initial state — instead of forcing every test to start with `WhenGiven`.
 
-| Phrase | When to use |
-|---|---|
-| `WhenGiven…` | Generic input parameters: `Add_WhenGiven1And2_ShouldReturn3` |
-| `When…` | Event or state-triggered behavior: `WhenOrderIsCancelled_ShouldRefundPayment` |
-| `WhenStarting…` / `WhenStartingAt…` | Initial state matters: `Increment_WhenStartingAtZero_ShouldReturn1` |
-| `WhenInputIs…` | Single-argument shape: `IsValidEmail_WhenInputIsNull_ShouldReturnFalse` |
-| `WhenFormatIs…` | Specific format failures: `IsValidEmail_WhenFormatIsInvalid_ShouldReturnFalse` |
-| `WhenCalled…` | Method invocation under a specific condition: `Reset_WhenCalled_ShouldReturnToZero` |
+| Phrase                              | When to use                                                                         |
+| ----------------------------------- | ----------------------------------------------------------------------------------- |
+| `WhenGiven…`                        | Generic input parameters: `Add_WhenGiven1And2_ShouldReturn3`                        |
+| `When…`                             | Event or state-triggered behavior: `WhenOrderIsCancelled_ShouldRefundPayment`       |
+| `WhenStarting…` / `WhenStartingAt…` | Initial state matters: `Increment_WhenStartingAtZero_ShouldReturn1`                 |
+| `WhenInputIs…`                      | Single-argument shape: `IsValidEmail_WhenInputIsNull_ShouldReturnFalse`             |
+| `WhenFormatIs…`                     | Specific format failures: `IsValidEmail_WhenFormatIsInvalid_ShouldReturnFalse`      |
+| `WhenCalled…`                       | Method invocation under a specific condition: `Reset_WhenCalled_ShouldReturnToZero` |
 
 For the expected-result half:
 
-| Phrase | When to use |
-|---|---|
-| `ShouldReturn…` | Method returns a value |
-| `ShouldThrow…` | Expected exception type — include the exception in the name |
-| `ShouldBe…` | Post-state assertion (`ShouldBeActive`, `ShouldBeEmpty`) |
-| `ShouldContain…` | Collection-membership assertion |
-| `ShouldHandle…` | Boundary condition that should be tolerated, not throw |
-| `ShouldNot…` | Verifying the absence of a side effect (`ShouldNotSendReceipt`) |
+| Phrase           | When to use                                                     |
+| ---------------- | --------------------------------------------------------------- |
+| `ShouldReturn…`  | Method returns a value                                          |
+| `ShouldThrow…`   | Expected exception type — include the exception in the name     |
+| `ShouldBe…`      | Post-state assertion (`ShouldBeActive`, `ShouldBeEmpty`)        |
+| `ShouldContain…` | Collection-membership assertion                                 |
+| `ShouldHandle…`  | Boundary condition that should be tolerated, not throw          |
+| `ShouldNot…`     | Verifying the absence of a side effect (`ShouldNotSendReceipt`) |
 
 Examples:
 
@@ -104,12 +104,12 @@ You may **not** deviate by:
 
 `{ClassUnderTest}Tests`, in a namespace mirroring the production namespace with `.Tests` appended:
 
-| Production type | Test class | Namespace |
-|---|---|---|
-| `Calculator` | `CalculatorTests` | `MyProject.Tests` |
-| `OrderService` | `OrderServiceTests` | `MyProject.Services.Tests` |
-| `EmailHelper` | `EmailHelperTests` | `MyProject.Helpers.Tests` |
-| `PriceCalculator` | `PriceCalculatorTests` | `MyProject.Pricing.Tests` |
+| Production type   | Test class             | Namespace                  |
+| ----------------- | ---------------------- | -------------------------- |
+| `Calculator`      | `CalculatorTests`      | `MyProject.Tests`          |
+| `OrderService`    | `OrderServiceTests`    | `MyProject.Services.Tests` |
+| `EmailHelper`     | `EmailHelperTests`     | `MyProject.Helpers.Tests`  |
+| `PriceCalculator` | `PriceCalculatorTests` | `MyProject.Pricing.Tests`  |
 
 One test class per production class. If a single class needs many tests (40+), split by method using nested classes, not by inventing alternate suffixes:
 

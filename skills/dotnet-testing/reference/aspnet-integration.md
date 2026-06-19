@@ -59,11 +59,11 @@ public sealed class ProductsControllerTests : IClassFixture<WebApplicationFactor
 
 Match the test setup to what the API actually depends on. Don't pay for database wiring in a test that hits a controller with no DB.
 
-| Level | Shape                              | Test focus                                   | Factory wiring                |
-| ----- | ---------------------------------- | -------------------------------------------- | ----------------------------- |
-| 1     | No DB, no services                 | Routing, model binding, status codes         | Use `WebApplicationFactory<Program>` directly |
-| 2     | Service layer, no DB               | DI registration, controller -> service path  | Subclass factory, replace services with substitutes via `ConfigureTestServices` |
-| 3     | Full stack, real DB                | CRUD, ProblemDetails, validation, transactions | Subclass factory, replace `DbContextOptions` with InMemory or Testcontainers |
+| Level | Shape                | Test focus                                     | Factory wiring                                                                  |
+| ----- | -------------------- | ---------------------------------------------- | ------------------------------------------------------------------------------- |
+| 1     | No DB, no services   | Routing, model binding, status codes           | Use `WebApplicationFactory<Program>` directly                                   |
+| 2     | Service layer, no DB | DI registration, controller -> service path    | Subclass factory, replace services with substitutes via `ConfigureTestServices` |
+| 3     | Full stack, real DB  | CRUD, ProblemDetails, validation, transactions | Subclass factory, replace `DbContextOptions` with InMemory or Testcontainers    |
 
 Most controller tests are Level 2 or 3. Level 1 tests catch routing regressions cheaply and run very fast — keep a handful even when the project has progressed to Level 3.
 

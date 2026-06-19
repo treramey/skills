@@ -17,6 +17,7 @@ The plan must contain a `## Work breakdown` section in the [to-plan.md](to-plan.
 2. Re-check each slice against the rules below. The plan author should have applied them; re-check anyway. Any violation: surface it with a proposed split before continuing.
 
 3. **Quiz the user on the final task list.** Show the slices in dependency order with title, type, scope, acceptance, blocked-by. Ask:
+
    - Does the order feel right?
    - Anything to merge or split?
    - Anything to drop (out of scope after seeing the full list)?
@@ -24,6 +25,7 @@ The plan must contain a `## Work breakdown` section in the [to-plan.md](to-plan.
    Iterate until the user approves.
 
 4. Create tasks via `TaskCreate` in dependency order so blocking IDs resolve to real values. For each approved slice:
+
    - `TaskCreate({ subject: "<title>", description: "<scope + acceptance + plan path>" })`
    - For dependents: `TaskUpdate({ taskId, addBlockedBy: ["<blocker ID>"] })`
 
@@ -43,6 +45,7 @@ The plan must contain a `## Work breakdown` section in the [to-plan.md](to-plan.
 **Scope:** <one-line scope>
 
 **Acceptance:**
+
 - <gate condition from plan>
 
 **Source:** docs/testing-plans/<file>.md, slice #<n>

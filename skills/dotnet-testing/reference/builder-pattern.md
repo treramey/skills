@@ -249,23 +249,23 @@ public class CustomerUpgradeTestData : TheoryData<Customer, CustomerType>
 
 ### Builder vs Object Mother
 
-| Aspect | Builder | Object Mother |
-|---|---|---|
-| Flexibility | Tunable per test via `With…()` | Returns a fixed object |
-| Readability | Fluent intent at the call site | Have to open the mother to see what you got |
+| Aspect          | Builder                                    | Object Mother                                              |
+| --------------- | ------------------------------------------ | ---------------------------------------------------------- |
+| Flexibility     | Tunable per test via `With…()`             | Returns a fixed object                                     |
+| Readability     | Fluent intent at the call site             | Have to open the mother to see what you got                |
 | Maintainability | Add a `With…()` once; old tests stay green | Adding a variant either bloats the mother or duplicates it |
-| Best for | Unit tests with specific scenarios | Tiny smoke tests with no variation |
+| Best for        | Unit tests with specific scenarios         | Tiny smoke tests with no variation                         |
 
 Object Mothers are fine for trivial cases. Reach for a builder the moment you find yourself copy-pasting an Object Mother factory and tweaking one field.
 
 ### Builder vs AutoFixture
 
-| Aspect | Builder | AutoFixture |
-|---|---|---|
-| Control | Full — you set every field | Auto — random anonymous values |
-| Setup cost | Write the builder once | Zero |
-| Test intent | Loud (`ALockedOutUser`) | Quiet (the test relies on type alone) |
-| Best fit | Specific scenarios, semantic variants | Bulk fixtures, "any valid X" |
+| Aspect      | Builder                               | AutoFixture                           |
+| ----------- | ------------------------------------- | ------------------------------------- |
+| Control     | Full — you set every field            | Auto — random anonymous values        |
+| Setup cost  | Write the builder once                | Zero                                  |
+| Test intent | Loud (`ALockedOutUser`)               | Quiet (the test relies on type alone) |
+| Best fit    | Specific scenarios, semantic variants | Bulk fixtures, "any valid X"          |
 
 Not either-or. Use AutoFixture by default; introduce a builder for the type the moment intent matters. The two compose — an AutoFixture `ISpecimenBuilder` can delegate to your builder for a particular type.
 

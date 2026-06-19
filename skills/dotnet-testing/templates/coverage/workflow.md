@@ -2,7 +2,7 @@
 
 This document covers the full workflow for code coverage analysis across different environments.
 
----
+______________________________________________________________________
 
 ## Workflow overview
 
@@ -10,7 +10,7 @@ This document covers the full workflow for code coverage analysis across differe
 Configure project -> Run tests -> Collect coverage -> Generate report -> Analyze -> Improve tests
 ```
 
----
+______________________________________________________________________
 
 ## Method 1: .NET CLI (recommended for CI/CD)
 
@@ -85,7 +85,7 @@ In the generated HTML report, check:
 3. **File coverage** — identify low-coverage files
 4. **Risk areas** — red regions for uncovered code
 
----
+______________________________________________________________________
 
 ## Method 2: Visual Studio + Fine Code Coverage
 
@@ -134,7 +134,7 @@ Using the red markers:
 3. Add new test cases
 4. Re-run tests to verify
 
----
+______________________________________________________________________
 
 ## Method 3: VS Code
 
@@ -181,7 +181,7 @@ Use the shortcut `Ctrl+; Ctrl+Shift+I` or run:
 
 - `Test: Show Inline Coverage`
 
----
+______________________________________________________________________
 
 ## Method 4: CI/CD integration
 
@@ -282,7 +282,7 @@ steps:
       reportDirectory: '$(Build.SourcesDirectory)/coverage'
 ```
 
----
+______________________________________________________________________
 
 ## Coverage improvement strategy
 
@@ -335,7 +335,7 @@ steps:
    - Refactor high-complexity code
    - Backfill missing tests
 
----
+______________________________________________________________________
 
 ## Coverage report interpretation
 
@@ -354,14 +354,14 @@ steps:
 
 ### Color coding
 
-| Color  | Range  | Status   | Action                            |
-| ------ | ------ | -------- | --------------------------------- |
-| Green  | >= 75% | Good     | Maintain                          |
-| Yellow | 50-74% | Warning  | Evaluate whether more tests help  |
-| Red    | < 50%  | Danger   | Priority for new tests            |
-| Grey   | N/A    | Excluded | Verify exclusion is intentional   |
+| Color  | Range  | Status   | Action                           |
+| ------ | ------ | -------- | -------------------------------- |
+| Green  | >= 75% | Good     | Maintain                         |
+| Yellow | 50-74% | Warning  | Evaluate whether more tests help |
+| Red    | < 50%  | Danger   | Priority for new tests           |
+| Grey   | N/A    | Excluded | Verify exclusion is intentional  |
 
----
+______________________________________________________________________
 
 ## Common troubleshooting
 
@@ -429,7 +429,7 @@ reportgenerator `
   run: dotnet test --verbosity detailed --collect:"XPlat Code Coverage"
 ```
 
----
+______________________________________________________________________
 
 ## Checklist
 
@@ -459,7 +459,7 @@ Before running coverage analysis, confirm:
 - [ ] Coverage report uploaded
 - [ ] Gate matches team standard
 
----
+______________________________________________________________________
 
 ## Best practices
 
@@ -481,7 +481,7 @@ Before running coverage analysis, confirm:
 - Test trivial getters/setters
 - Add tests blindly without first reading the red regions
 
----
+______________________________________________________________________
 
 ## Related resources
 

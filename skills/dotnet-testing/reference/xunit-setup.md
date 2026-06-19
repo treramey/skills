@@ -56,12 +56,12 @@ tests/
 └── MyProject.WebApi.Test.Integration/       # WebApplicationFactory / Testcontainers
 ```
 
-| Suffix | Purpose | Typical cost |
-|---|---|---|
-| `*.Tests` or `*.Test.Unit` | Unit tests — no external resources | Milliseconds |
-| `*.Test.Integration` | Multi-component, may touch DB/HTTP/Testcontainers | Seconds |
-| `*.Acceptance.Tests` | End-to-end behaviour | Seconds to minutes |
-| `*.Performance.Tests` | Throughput/latency benchmarks | Variable |
+| Suffix                     | Purpose                                           | Typical cost       |
+| -------------------------- | ------------------------------------------------- | ------------------ |
+| `*.Tests` or `*.Test.Unit` | Unit tests — no external resources                | Milliseconds       |
+| `*.Test.Integration`       | Multi-component, may touch DB/HTTP/Testcontainers | Seconds            |
+| `*.Acceptance.Tests`       | End-to-end behaviour                              | Seconds to minutes |
+| `*.Performance.Tests`      | Throughput/latency benchmarks                     | Variable           |
 
 CI can split fast vs slow phases off these suffixes:
 
@@ -121,24 +121,24 @@ Notes:
 - `xunit.runner.visualstudio` and `coverlet.collector` use `PrivateAssets=all` so they don't leak into downstream references.
 - `<Using Include="Xunit" />` removes `using Xunit;` from every test file (the repo's `ImplicitUsings` is `enable`).
 
-| Property | Effect |
-|---|---|
-| `IsPackable=false` | Test projects must never produce a NuGet package. |
-| `IsTestProject=true` | Marks the project so test runners and `dotnet test` discover it. |
-| `Nullable=enable` | NRT enabled — tests catch null-handling regressions. |
-| `ImplicitUsings=enable` | Allows the `<Using Include="Xunit" />` shortcut. |
+| Property                | Effect                                                           |
+| ----------------------- | ---------------------------------------------------------------- |
+| `IsPackable=false`      | Test projects must never produce a NuGet package.                |
+| `IsTestProject=true`    | Marks the project so test runners and `dotnet test` discover it. |
+| `Nullable=enable`       | NRT enabled — tests catch null-handling regressions.             |
+| `ImplicitUsings=enable` | Allows the `<Using Include="Xunit" />` shortcut.                 |
 
 ### Why each core package is here
 
-| Package | What it does |
-|---|---|
-| `xunit` | The framework — `[Fact]`, `[Theory]`, the `Assert` class. |
-| `xunit.runner.visualstudio` | Test Explorer integration for VS Code, Visual Studio, and Rider. |
-| `Microsoft.NET.Test.Sdk` | The .NET test platform — what makes `dotnet test` discover and run tests. |
-| `coverlet.collector` | Code coverage — see [reference/coverage.md](coverage.md). |
-| `AwesomeAssertions` | Fluent assertions — see [reference/awesome-assertions.md](awesome-assertions.md). |
-| `NSubstitute` | Test doubles — see [reference/nsubstitute.md](nsubstitute.md). |
-| `AutoFixture` (+ `Xunit2`, `AutoNSubstitute`) | Anonymous data + `[AutoData]` — see [reference/autofixture.md](autofixture.md). |
+| Package                                       | What it does                                                                      |
+| --------------------------------------------- | --------------------------------------------------------------------------------- |
+| `xunit`                                       | The framework — `[Fact]`, `[Theory]`, the `Assert` class.                         |
+| `xunit.runner.visualstudio`                   | Test Explorer integration for VS Code, Visual Studio, and Rider.                  |
+| `Microsoft.NET.Test.Sdk`                      | The .NET test platform — what makes `dotnet test` discover and run tests.         |
+| `coverlet.collector`                          | Code coverage — see [reference/coverage.md](coverage.md).                         |
+| `AwesomeAssertions`                           | Fluent assertions — see [reference/awesome-assertions.md](awesome-assertions.md). |
+| `NSubstitute`                                 | Test doubles — see [reference/nsubstitute.md](nsubstitute.md).                    |
+| `AutoFixture` (+ `Xunit2`, `AutoNSubstitute`) | Anonymous data + `[AutoData]` — see [reference/autofixture.md](autofixture.md).   |
 
 ### Optional `xunit.runner.json`
 
@@ -250,10 +250,10 @@ This is a controlled, file-level escape hatch — it does not authorise the test
 
 ## Test class naming and folder layout
 
-| Production class | Test class | File |
-|---|---|---|
-| `Calculator` | `CalculatorTests` | `CalculatorTests.cs` |
-| `OrderService` | `OrderServiceTests` | `OrderServiceTests.cs` |
+| Production class | Test class            | File                     |
+| ---------------- | --------------------- | ------------------------ |
+| `Calculator`     | `CalculatorTests`     | `CalculatorTests.cs`     |
+| `OrderService`   | `OrderServiceTests`   | `OrderServiceTests.cs`   |
 | `UserRepository` | `UserRepositoryTests` | `UserRepositoryTests.cs` |
 
 Folder layout in the test project mirrors the production project's folder layout so a contributor finding `src/MyProject.Core/Services/OrderService.cs` knows the tests live at `tests/MyProject.Core.Tests/Services/OrderServiceTests.cs`.
@@ -275,13 +275,13 @@ IDE integration (VS Code C# Dev Kit, Visual Studio Test Explorer, Rider's Unit T
 
 ## Troubleshooting
 
-| Symptom | Likely cause |
-|---|---|
-| Test Explorer is empty | Missing `xunit.runner.visualstudio` or `Microsoft.NET.Test.Sdk`; `bin/`/`obj/` is stale — clean and rebuild. |
-| `dotnet test` finds them, IDE does not | IDE extension missing (C# Dev Kit for VS Code), or `IsTestProject` not set. |
-| Tests pass alone, fail in parallel | Shared mutable state — usually a `static` field or `IClassFixture` carrying mutable data. |
+| Symptom                                   | Likely cause                                                                                                                                           |
+| ----------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Test Explorer is empty                    | Missing `xunit.runner.visualstudio` or `Microsoft.NET.Test.Sdk`; `bin/`/`obj/` is stale — clean and rebuild.                                           |
+| `dotnet test` finds them, IDE does not    | IDE extension missing (C# Dev Kit for VS Code), or `IsTestProject` not set.                                                                            |
+| Tests pass alone, fail in parallel        | Shared mutable state — usually a `static` field or `IClassFixture` carrying mutable data.                                                              |
 | "No tests are available in this assembly" | Project compiled but `[Fact]`/`[Theory]` not present, or `xunit` reference broken. Confirm the `<Using Include="Xunit" />` or explicit `using Xunit;`. |
-| Internal types not visible to tests | Missing `<InternalsVisibleTo Include="MyProject.Core.Tests" />` in the production csproj. |
+| Internal types not visible to tests       | Missing `<InternalsVisibleTo Include="MyProject.Core.Tests" />` in the production csproj.                                                              |
 
 ## Checklist
 

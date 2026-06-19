@@ -73,13 +73,13 @@ Use `GetTimestamp` / `GetElapsedTime` for perf-style measurements in production 
 
 From `Microsoft.Extensions.TimeProvider.Testing`.
 
-| Member | Purpose | Use when |
-|---|---|---|
-| `SetUtcNow(DateTimeOffset)` | Pin the UTC clock to an exact instant. | You need a deterministic UTC moment. |
-| `SetLocalTimeZone(TimeZoneInfo)` | Pin the simulated local zone. | Testing timezone-sensitive logic. |
-| `Advance(TimeSpan)` | Move the clock forward instantly (non-blocking). | Cache expiry, token expiry, retry windows. |
-| `GetUtcNow()` | Read the simulated UTC time. | Asserting on what the clock returned. |
-| `GetLocalNow()` | Read the simulated local time. | Asserting on what the SUT saw. |
+| Member                           | Purpose                                          | Use when                                   |
+| -------------------------------- | ------------------------------------------------ | ------------------------------------------ |
+| `SetUtcNow(DateTimeOffset)`      | Pin the UTC clock to an exact instant.           | You need a deterministic UTC moment.       |
+| `SetLocalTimeZone(TimeZoneInfo)` | Pin the simulated local zone.                    | Testing timezone-sensitive logic.          |
+| `Advance(TimeSpan)`              | Move the clock forward instantly (non-blocking). | Cache expiry, token expiry, retry windows. |
+| `GetUtcNow()`                    | Read the simulated UTC time.                     | Asserting on what the clock returned.      |
+| `GetLocalNow()`                  | Read the simulated local time.                   | Asserting on what the SUT saw.             |
 
 ### Helper: `SetLocalNow`
 

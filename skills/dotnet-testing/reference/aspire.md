@@ -10,13 +10,13 @@
 
 ## Aspire Testing vs Testcontainers
 
-| Aspect | .NET Aspire Testing | Testcontainers |
-|---|---|---|
-| Goal | Cloud-native distributed apps | Generic container-backed tests |
-| Configuration | Declarative AppHost project | Imperative per-container code |
-| Service orchestration | Automatic (via AppHost) | Manual |
-| Learning curve | Higher | Lower |
-| Best for | Projects already on Aspire | Traditional .NET solutions |
+| Aspect                | .NET Aspire Testing           | Testcontainers                 |
+| --------------------- | ----------------------------- | ------------------------------ |
+| Goal                  | Cloud-native distributed apps | Generic container-backed tests |
+| Configuration         | Declarative AppHost project   | Imperative per-container code  |
+| Service orchestration | Automatic (via AppHost)       | Manual                         |
+| Learning curve        | Higher                        | Lower                          |
+| Best for              | Projects already on Aspire    | Traditional .NET solutions     |
 
 Pick Aspire testing when the project already runs on Aspire, you need to exercise interactions across services, and a unified dev/test topology is valuable. Pick Testcontainers when the project is a traditional .NET solution, you want fine-grained control over individual containers, or the team isn't already invested in Aspire.
 

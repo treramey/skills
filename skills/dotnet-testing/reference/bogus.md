@@ -268,14 +268,14 @@ Repo convention: seeders live in the consumer application, not in `SvApi.Databas
 
 ## Bogus vs AutoFixture — picking one
 
-| Scenario | Use | Why |
-|---|---|---|
-| Pure unit test, data content doesn't matter | AutoFixture | Anonymous data, zero ceremony. |
-| Test that asserts on data *shape* (e.g. email pattern, address layout) | Bogus | Realistic format. |
-| Integration test with seeded data | Bogus | Production-like rows. |
-| UI prototype / demo | Bogus | Looks real to humans. |
-| Performance / load test | Bogus | Realistic distribution and length. |
-| Complex object graph with cyclic references | AutoFixture | Resolves the graph automatically. |
+| Scenario                                                               | Use         | Why                                |
+| ---------------------------------------------------------------------- | ----------- | ---------------------------------- |
+| Pure unit test, data content doesn't matter                            | AutoFixture | Anonymous data, zero ceremony.     |
+| Test that asserts on data *shape* (e.g. email pattern, address layout) | Bogus       | Realistic format.                  |
+| Integration test with seeded data                                      | Bogus       | Production-like rows.              |
+| UI prototype / demo                                                    | Bogus       | Looks real to humans.              |
+| Performance / load test                                                | Bogus       | Realistic distribution and length. |
+| Complex object graph with cyclic references                            | AutoFixture | Resolves the graph automatically.  |
 
 You can combine them — AutoFixture produces the SUT and its dependencies; Bogus produces the realistic payload you pass to a method. See the AutoFixture–Bogus integration section of [reference/autofixture.md](autofixture.md).
 

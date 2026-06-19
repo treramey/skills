@@ -120,12 +120,12 @@ fixture.Customizations.Add(new MyNumericBuilder(...));       // may be intercept
 fixture.Customizations.Insert(0, new MyNumericBuilder(...)); // guarantees first shot
 ```
 
-| Type       | Built-in interceptors                              | Effect of `Add()`                       |
-| ---------- | -------------------------------------------------- | --------------------------------------- |
-| `int`      | `RangeAttributeRelay`, `NumericSequenceGenerator`  | Builder may never run — use `Insert(0)` |
-| `decimal`/`double`/`float` | `NumericSequenceGenerator`                 | Same — use `Insert(0)`               |
-| `DateTime` | none specific                                      | `Add()` works                        |
-| properties | resolved late                                      | `Add()` usually works                |
+| Type                       | Built-in interceptors                             | Effect of `Add()`                       |
+| -------------------------- | ------------------------------------------------- | --------------------------------------- |
+| `int`                      | `RangeAttributeRelay`, `NumericSequenceGenerator` | Builder may never run — use `Insert(0)` |
+| `decimal`/`double`/`float` | `NumericSequenceGenerator`                        | Same — use `Insert(0)`                  |
+| `DateTime`                 | none specific                                     | `Add()` works                           |
+| properties                 | resolved late                                     | `Add()` usually works                   |
 
 Group related rules into a class so the same fixture configuration can be reused across multiple test projects:
 
@@ -226,14 +226,14 @@ public sealed class EmailSpecimenBuilder : ISpecimenBuilder
 }
 ```
 
-| Builder                    | Matches                                       | Bogus call               |
-| -------------------------- | --------------------------------------------- | ------------------------ |
-| `EmailSpecimenBuilder`     | property name contains `Email`                | `Internet.Email()`       |
-| `PhoneSpecimenBuilder`     | property name contains `Phone`                | `Phone.PhoneNumber()`    |
-| `NameSpecimenBuilder`      | `FirstName` / `LastName` / `FullName`         | `Person.FirstName` etc.  |
-| `AddressSpecimenBuilder`   | `Street` / `City` / `PostalCode` / `Country`  | `Address.*`              |
-| `WebsiteSpecimenBuilder`   | property name contains `Website`              | `Internet.Url()`         |
-| `CompanyNameSpecimenBuilder` | `Name` on a `Company` type                  | `Company.CompanyName()`  |
+| Builder                      | Matches                                      | Bogus call              |
+| ---------------------------- | -------------------------------------------- | ----------------------- |
+| `EmailSpecimenBuilder`       | property name contains `Email`               | `Internet.Email()`      |
+| `PhoneSpecimenBuilder`       | property name contains `Phone`               | `Phone.PhoneNumber()`   |
+| `NameSpecimenBuilder`        | `FirstName` / `LastName` / `FullName`        | `Person.FirstName` etc. |
+| `AddressSpecimenBuilder`     | `Street` / `City` / `PostalCode` / `Country` | `Address.*`             |
+| `WebsiteSpecimenBuilder`     | property name contains `Website`             | `Internet.Url()`        |
+| `CompanyNameSpecimenBuilder` | `Name` on a `Company` type                   | `Company.CompanyName()` |
 
 Register them once via an extension so tests opt in with one line:
 

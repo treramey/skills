@@ -10,15 +10,15 @@ For deep object graphs, ordering rules, and full `BeEquivalentTo` configuration,
 
 ## Categories at a glance
 
-| Category | Common methods |
-|---|---|
-| Object | `NotBeNull()`, `BeOfType<T>()`, `BeAssignableTo<T>()`, `BeEquivalentTo()` |
-| String | `Contain()`, `StartWith()`, `EndWith()`, `MatchRegex()`, `BeEquivalentTo()` (case-insensitive), `ContainEquivalentOf()` |
-| Numeric | `BeGreaterThan()`, `BeLessThan()`, `BeInRange()`, `BeOneOf()`, `BeApproximately()`, `BePositive()`, `BeNegative()` |
-| Numeric collection | `EqualApproximately()`, `NotEqualApproximately()` (9.4+, .NET 8+) |
-| Collection | `HaveCount()`, `Contain()`, `ContainSingle()`, `BeEquivalentTo()`, `AllSatisfy()`, `OnlyContain()`, `OnlyHaveUniqueItems()`, `BeInAscendingOrder()` |
-| Exception | `Throw<T>()`, `NotThrow()`, `WithMessage()`, `WithInnerException()` |
-| Async | `ThrowAsync<T>()`, `CompleteWithinAsync()` |
+| Category           | Common methods                                                                                                                                      |
+| ------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Object             | `NotBeNull()`, `BeOfType<T>()`, `BeAssignableTo<T>()`, `BeEquivalentTo()`                                                                           |
+| String             | `Contain()`, `StartWith()`, `EndWith()`, `MatchRegex()`, `BeEquivalentTo()` (case-insensitive), `ContainEquivalentOf()`                             |
+| Numeric            | `BeGreaterThan()`, `BeLessThan()`, `BeInRange()`, `BeOneOf()`, `BeApproximately()`, `BePositive()`, `BeNegative()`                                  |
+| Numeric collection | `EqualApproximately()`, `NotEqualApproximately()` (9.4+, .NET 8+)                                                                                   |
+| Collection         | `HaveCount()`, `Contain()`, `ContainSingle()`, `BeEquivalentTo()`, `AllSatisfy()`, `OnlyContain()`, `OnlyHaveUniqueItems()`, `BeInAscendingOrder()` |
+| Exception          | `Throw<T>()`, `NotThrow()`, `WithMessage()`, `WithInnerException()`                                                                                 |
+| Async              | `ThrowAsync<T>()`, `CompleteWithinAsync()`                                                                                                          |
 
 ## Object assertions
 

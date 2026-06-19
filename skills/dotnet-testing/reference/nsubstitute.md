@@ -15,13 +15,13 @@ Three-part naming, 3A, and FIRST all apply — see [reference/fundamentals.md](f
 
 Per Meszaros (*xUnit Test Patterns*), these are roles, not types — the same `Substitute.For<T>()` plays whichever role the test needs.
 
-| Role | Purpose | NSubstitute idiom |
-|---|---|---|
-| Dummy | Satisfies a parameter; not used | `Substitute.For<T>()` with no setup |
-| Stub | Returns canned data for a scenario | `.Returns(value)` |
-| Fake | Lightweight working implementation | Hand-rolled class implementing the interface |
-| Spy | Records calls for later inspection | `.Received()` |
-| Mock | Enforces expected interactions | `.Received(n)` strict verification |
+| Role  | Purpose                            | NSubstitute idiom                            |
+| ----- | ---------------------------------- | -------------------------------------------- |
+| Dummy | Satisfies a parameter; not used    | `Substitute.For<T>()` with no setup          |
+| Stub  | Returns canned data for a scenario | `.Returns(value)`                            |
+| Fake  | Lightweight working implementation | Hand-rolled class implementing the interface |
+| Spy   | Records calls for later inspection | `.Received()`                                |
+| Mock  | Enforces expected interactions     | `.Received(n)` strict verification           |
 
 `Stub` answers "what does the SUT *read*?". `Mock` answers "what does the SUT *write*?". A single substitute often plays both roles in one test — that's fine; the role labels are about which assertions you actually make, not how the object was constructed. Worked code for each role lives in [templates/nsubstitute/mock-patterns.cs](../templates/nsubstitute/mock-patterns.cs).
 
